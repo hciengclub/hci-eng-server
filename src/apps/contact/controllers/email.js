@@ -10,11 +10,8 @@ async function email(req, res) {
 
     if (result.status === StatusCodes.OK)
         return res.status(result.status).send('ok')
-
-    if (result.status === StatusCodes.BAD_REQUEST)
-        return res.status(result.status).json(result.errors);
-
-    return res.status(result.status).send('something went wrong...');
+        
+    return res.status(result.status).json(result.errors);
 }
 
 module.exports = email;

@@ -24,7 +24,7 @@ class EmailService {
         });
 
         if (sendResult === false)
-            return { status: StatusCodes.INTERNAL_SERVER_ERROR};
+            return { status: StatusCodes.INTERNAL_SERVER_ERROR };
 
         return { status: StatusCodes.OK };
 
@@ -32,7 +32,7 @@ class EmailService {
 
     _validate() {
         let errors = {};
-        errors['name'] = NameValidator.validate('');
+        errors['name'] = NameValidator.validate(this.name);
         errors['email'] = EmailValidator.validate(this.email);
 
         return cleanErrors(errors);
