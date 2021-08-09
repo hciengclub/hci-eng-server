@@ -21,7 +21,7 @@ class EmailService {
             return false;
         });
 
-        if (sendResult===false)
+        if (sendResult === false)
             return { status: StatusCodes.INTERNAL_SERVER_ERROR };
 
         return { status: StatusCodes.OK };
@@ -33,10 +33,11 @@ class EmailService {
         const validatedEmail = EmailValidator.validate(this.email);
 
         if (!validatedName.valid)
-            return validatedName;
+            return { valid: false, errorMessage: validatedName.errorMessage };
 
         if (!validatedEmail.valid)
-            return validatedEmail;
+            return { valid: false, errorMessage: validatedEmail.errorMessage };
+
 
         return { valid: true };
     }
