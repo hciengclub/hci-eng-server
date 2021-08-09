@@ -1,5 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const nodemailer = require('nodemailer');
+const cleanErrors = require('../../../helpers/clean_errors');
 const EmailValidator = require('../../../validators/email');
 const NameValidator = require('../../../validators/name');
 
@@ -13,7 +14,7 @@ class EmailService {
 
     send() {
         const errors = this._validate();
-        if (errors.length > 0)
+        if (errors)
             return { status: StatusCodes.BAD_REQUEST, errors: errors };
 
         const transporter = new TransporterSingleton();
@@ -31,10 +32,10 @@ class EmailService {
 
     _validate() {
         let errors = {};
-        errors['name'] = NameValidator.validate(this.name);
+        errors['name'] = NameValidator.validate('');
         errors['email'] = EmailValidator.validate(this.email);
 
-        return errors;
+        return cleanErrors(errors);
     }
 
     _genMessage() {
