@@ -11,12 +11,13 @@ class EmailService {
         this.message = message;
     }
 
-    send() {
+    async send() {
         const validatedData = this._validate();
         if (!validatedData.valid)
             return { status: StatusCodes.BAD_REQUEST, errorMessage: validatedData.errorMessage };
         const transporter = new TransporterSingleton();
-        const sendResult = transporter.transporterInstance.sendMail(this._genMessage(), (err) => {
+        const sendResult = await transporter.transporterInstance.sendMail(this._genMessage(), (err) => {
+            console.log(err)
             return false;
         });
 

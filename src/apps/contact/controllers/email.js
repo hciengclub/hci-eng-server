@@ -6,7 +6,7 @@ async function email(req, res) {
     const { name, email, message } = req.body;
 
     const emailService = new EmailService(name, email, message)
-    const result = emailService.send();
+    const result = await emailService.send();
 
     if (result.status === StatusCodes.OK)
         return res.status(result.status).send('ok')
