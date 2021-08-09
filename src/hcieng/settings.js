@@ -16,7 +16,7 @@ function initSettings() {
     if (settings.DEBUG) {
         settings.CLIENT_ORIGIN = 'http://localhost:3000';
     } else {
-        settings.CLIENT_ORIGIN = 'https://hcieng.xyz';
+        settings.CLIENT_ORIGIN = 'https://www.hcieng.xyz';
     }
 }
 

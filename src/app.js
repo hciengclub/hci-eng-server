@@ -12,6 +12,7 @@ function init() {
 }
 
 function initMiddleware() {
+    console.log(settings.CLIENT_ORIGIN);
     app.use(cors({ origin: settings.CLIENT_ORIGIN, credentials: true }));
     app.use(express.json());
     app.use(validateClientApiTkn);
