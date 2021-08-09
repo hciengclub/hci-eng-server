@@ -1,6 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const nodemailer = require('nodemailer');
 const cleanErrors = require('../../../helpers/clean_errors');
+const isEmpty = require('../../../helpers/is_empty');
 const EmailValidator = require('../../../validators/email');
 const NameValidator = require('../../../validators/name');
 
@@ -14,7 +15,7 @@ class EmailService {
 
     send() {
         const errors = this._validate();
-        if (errors)
+        if (!isEmpty(errors))
             return { status: StatusCodes.BAD_REQUEST, errors: errors };
 
         const transporter = new TransporterSingleton();
