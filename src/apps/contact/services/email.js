@@ -11,35 +11,30 @@ class EmailService {
         this.message = message;
     }
 
-    async send() {
-        const validatedData = this._validate();
-        if (!validatedData.valid)
-            return { status: StatusCodes.BAD_REQUEST, errorMessage: validatedData.errorMessage };
+    send() {
+        const errors = this._validate();
+        if (errors.length > 0)
+            return { status: StatusCodes.BAD_REQUEST, errors: errors };
+
         const transporter = new TransporterSingleton();
-        const sendResult = await transporter.transporterInstance.sendMail(this._genMessage(), (err) => {
+        const sendResult = transporter.transporterInstance.sendMail(this._genMessage(), (err) => {
             console.log(err)
             return false;
         });
 
         if (sendResult === false)
-            return { status: StatusCodes.INTERNAL_SERVER_ERROR };
+            return { status: StatusCodes.INTERNAL_SERVER_ERROR};
 
         return { status: StatusCodes.OK };
 
     }
 
     _validate() {
-        const validatedName = NameValidator.validate(this.name);
-        const validatedEmail = EmailValidator.validate(this.email);
+        let errors = {};
+        errors['name'] = NameValidator.validate(this.name);
+        errors['email'] = EmailValidator.validate(this.email);
 
-        if (!validatedName.valid)
-            return { valid: false, errorMessage: validatedName.errorMessage };
-
-        if (!validatedEmail.valid)
-            return { valid: false, errorMessage: validatedEmail.errorMessage };
-
-
-        return { valid: true };
+        return errors;
     }
 
     _genMessage() {

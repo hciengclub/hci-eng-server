@@ -6,13 +6,15 @@ async function email(req, res) {
     const { name, email, message } = req.body;
 
     const emailService = new EmailService(name, email, message)
-    const result = await emailService.send();
+    const result = emailService.send();
 
     if (result.status === StatusCodes.OK)
         return res.status(result.status).send('ok')
 
-    return res.status(result.status).send(result.errorMessage);
+    if (result.status === StatusCodes.BAD_REQUEST)
+        return res.status(result.status).json(result.errors);
 
+    return res.status(result.status).send('something went wrong...');
 }
 
 module.exports = email;
