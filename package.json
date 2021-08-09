@@ -1,0 +1,16 @@
+{
+    "name": "server",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "nodemon ./bin/www"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "http-status-codes": "^2.1.4",
+        "nodemailer": "^6.6.2",
+        "nodemon": "^2.0.12"
+    }
+}
