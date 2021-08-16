@@ -3,23 +3,23 @@ const app = express();
 const cors = require("cors");
 
 const { settings } = require("./hcieng/settings");
-const contactRouter = require("./apps/contact/routes");
-const validateClientApiTkn = require("./middleware/validate_client_api_tkn");
+const contact_router = require("./apps/contact/routes");
+const validate_client_api_tkn = require("./middleware/validate_client_api_tkn");
 
 function init() {
-    initMiddleware();
-    initRoutes();
+    init_middleware();
+    init_routes();
 }
 
-function initMiddleware() {
+function init_middleware() {
     console.log(settings.CLIENT_ORIGIN);
     app.use(cors({ origin: settings.CLIENT_ORIGIN, credentials: true }));
     app.use(express.json());
-    app.use(validateClientApiTkn);
+    app.use(validate_client_api_tkn);
 }
 
-function initRoutes() {
-    app.use('/contact', contactRouter);
+function init_routes() {
+    app.use('/contact', contact_router);
 }
 
 init();

@@ -1,5 +1,5 @@
-function cleanErrors(errors) {
-    for (var error in errors) {
+function clean_errors(errors) {
+    for (let error in errors) {
         if (errors[error] === null || errors[error] === undefined) {
             delete errors[error];
         }
@@ -7,4 +7,4 @@ function cleanErrors(errors) {
     return errors
 }
 
-module.exports = cleanErrors;
+module.exports = clean_errors;

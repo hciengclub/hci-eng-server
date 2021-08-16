@@ -3,7 +3,7 @@ let settings = {
     CLIENT_ORIGIN: ''
 }
 
-function initSettings() {
+function init_settings() {
     require("dotenv").config();
 
     if (process.env.DEBUG === 'true')
@@ -20,4 +20,4 @@ function initSettings() {
     }
 }
 
-module.exports = { settings, initSettings };
+module.exports = { settings, init_settings };

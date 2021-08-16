@@ -19,11 +19,11 @@ class EmailService {
             return { status: StatusCodes.BAD_REQUEST, errors: { 'errors': errors } };
 
         const transporter = new TransporterSingleton();
-        const sendResult = transporter.transporterInstance.sendMail(this._genMessage(), (err) => {
+        const send_result = transporter.transporterInstance.sendMail(this._gen_message(), (err) => {
             return false;
         });
 
-        if (sendResult === false)
+        if (send_result === false)
             return { status: StatusCodes.INTERNAL_SERVER_ERROR, errors: { error: 'failed to send email' } };
 
         return { status: StatusCodes.OK };
@@ -38,7 +38,7 @@ class EmailService {
         return cleanErrors(errors);
     }
 
-    _genMessage() {
+    _gen_message() {
         return {
             from: this.name,
             to: process.env.HCIENG_EMAIL,

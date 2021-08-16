@@ -1,5 +1,5 @@
-function isEmpty(inputObject) {
-    return Object.keys(inputObject).length === 0;
+function is_empty(input_object) {
+    return Object.keys(input_object).length === 0;
 };
 
-module.exports = isEmpty;
+module.exports = is_empty;

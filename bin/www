@@ -1,6 +1,6 @@
-const { initSettings, settings } = require('../src/hcieng/settings');
+const { init_settings, settings } = require('../src/hcieng/settings');
 
-initSettings();
+init_settings();
 
 const app = require('../src/app');
 
@@ -11,11 +11,11 @@ var server = app.listen(app.get('port'), () =>
 );
 
 
-server.on('error', onError);
-server.on('listening', onListening);
+server.on('error', on_error);
+server.on('listening', on_listening);
 
 
-function onError(error) {
+function on_error(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -39,7 +39,7 @@ function onError(error) {
   }
 }
 
-function onListening() {
+function on_listening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr

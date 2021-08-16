@@ -1,9 +1,9 @@
 const express = require('express');
-const validateReCaptcha = require('../../middleware/validate_recaptcha');
-const contactRouter = express.Router();
+const validate_recaptcha = require('../../middleware/validate_recaptcha');
+const contact_router = express.Router();
 
 const email = require('./controllers/email');
 
-contactRouter.post('/email', validateReCaptcha, email);
+contact_router.post('/email', validate_recaptcha, email);
 
-module.exports = contactRouter;
+module.exports = contact_router;
