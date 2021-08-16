@@ -16,16 +16,15 @@ class EmailService {
     send() {
         const errors = this._validate();
         if (!isEmpty(errors))
-            return { status: StatusCodes.BAD_REQUEST, errors: errors };
+            return { status: StatusCodes.BAD_REQUEST, errors: { 'errors': errors } };
 
         const transporter = new TransporterSingleton();
         const sendResult = transporter.transporterInstance.sendMail(this._genMessage(), (err) => {
-            console.log(err)
             return false;
         });
 
         if (sendResult === false)
-            return { status: StatusCodes.INTERNAL_SERVER_ERROR };
+            return { status: StatusCodes.INTERNAL_SERVER_ERROR, errors: { error: 'failed to send email' } };
 
         return { status: StatusCodes.OK };
 
